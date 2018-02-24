@@ -6,7 +6,9 @@ import FilterGallery from "./FilterGallery";
 
 class GalleryContainer extends React.Component {
   state = {
-    paintings: []
+    paintings: [],
+    filterText: "",
+    filterCat: "Title"
   };
 
   componentDidMount() {
@@ -63,47 +65,27 @@ class GalleryContainer extends React.Component {
 
   //FILTER FUNCTIONS
 
-  filterGallery = ({ filter, filterCat }) => {
-    if (filterCat === "Title") {
-      this.filterByTitle(filter);
-    } else if (filterCat === "Year") {
-      this.filterByYear(filter);
-    }
-    // else if (filterCat === "Popularity") {
-    //   this.filterByPopularity(filter);
-    // }
+  handleFilterChange = event => {
+    this.setState({ filterText: event.target.value });
   };
 
-  //filter helpers
-
-  filterByTitle = filter => {
-    const filteredPaintings = this.state.paintings.filter(painting =>
-      painting.title.includes(filter)
-    );
-    this.setState({ paintings: filteredPaintings });
+  handleFilterCat = event => {
+    this.setState({ filterCat: event.target.value });
   };
-
-  filterByYear = filter => {
-    const filteredPaintings = this.state.paintings.filter(
-      painting => (painting.date ? painting.date.includes(filter) : false)
-    );
-    this.setState({ paintings: filteredPaintings });
-  };
-
-  // filterByPopularity = filter => {
-  //   const filteredPaintings = this.state.paintings.filter(painting =>
-  //     painting.votes.includes(filter)
-  //   );
-  //   this.setState({ paintings: filteredPaintings });
-  // };
 
   render() {
     return (
       <div>
         <SortGallery sortGallery={this.sortGallery} />
-        <FilterGallery filter={this.filterGallery} />
+        <FilterGallery
+          handleFilterChange={this.handleFilterChange}
+          handleFilterCat={this.handleFilterCat}
+          filterText={this.state.filterText}
+          filterCat={this.state.filterCat}
+        />
         <GalleryList
-          filterGallery={this.filterGallery}
+          filterText={this.state.filterText}
+          filterCat={this.state.filterCat}
           paintings={this.state.paintings}
         />
       </div>
