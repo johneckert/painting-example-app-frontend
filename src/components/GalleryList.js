@@ -8,7 +8,10 @@ const GalleryList = props => {
         props.paintings.map(painting => {
           return (
             <li key={painting.id}>
-              <h4>{painting.title}</h4>
+              <h4>
+                {painting.title} |
+                {painting.date}
+              </h4>
               <img src={painting.image} alt={painting.title} />
             </li>
           );

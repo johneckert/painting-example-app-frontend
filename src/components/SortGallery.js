@@ -2,7 +2,7 @@ import React from "react";
 
 class SortGallery extends React.Component {
   state = {
-    value: "Title"
+    value: "Label"
   };
 
   handleChange = event => {
@@ -13,7 +13,8 @@ class SortGallery extends React.Component {
 
   render() {
     return (
-      <select onChange={this.handleChange}>
+      <select onChange={this.handleChange} value={this.state.value}>
+        <option value="Label">Sort</option>
         <option value="Title">Title</option>
         <option value="Year">Year</option>
         <option value="Popularity">Popularity</option>

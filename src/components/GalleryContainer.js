@@ -2,6 +2,7 @@ import React from "react";
 
 import GalleryList from "./GalleryList";
 import SortGallery from "./SortGallery";
+import FilterGallery from "./FilterGallery";
 
 class GalleryContainer extends React.Component {
   state = {
@@ -9,13 +10,17 @@ class GalleryContainer extends React.Component {
   };
 
   componentDidMount() {
+    this.getPaintings();
+  }
+
+  getPaintings = () => {
     fetch("http://localhost:3000/api/v1/paintings")
       .then(res => res.json())
       .then(json => {
         this.setState({ paintings: json });
       });
-  }
-
+  };
+  //SORT FUNCTIONS
   sortGallery = criteria => {
     if (criteria === "Title") {
       this.sortByTitle();
@@ -26,7 +31,7 @@ class GalleryContainer extends React.Component {
     }
   };
 
-  //SORT HELPERS
+  //sort helpers
   sortByTitle = () => {
     const paintings = this.state.paintings.sort((a, b) => {
       const aTitle = a.title.toUpperCase();
@@ -56,11 +61,51 @@ class GalleryContainer extends React.Component {
     this.setState({ paintings });
   };
 
+  //FILTER FUNCTIONS
+
+  filterGallery = ({ filter, filterCat }) => {
+    if (filterCat === "Title") {
+      this.filterByTitle(filter);
+    } else if (filterCat === "Year") {
+      this.filterByYear(filter);
+    }
+    // else if (filterCat === "Popularity") {
+    //   this.filterByPopularity(filter);
+    // }
+  };
+
+  //filter helpers
+
+  filterByTitle = filter => {
+    const filteredPaintings = this.state.paintings.filter(painting =>
+      painting.title.includes(filter)
+    );
+    this.setState({ paintings: filteredPaintings });
+  };
+
+  filterByYear = filter => {
+    const filteredPaintings = this.state.paintings.filter(
+      painting => (painting.date ? painting.date.includes(filter) : false)
+    );
+    this.setState({ paintings: filteredPaintings });
+  };
+
+  // filterByPopularity = filter => {
+  //   const filteredPaintings = this.state.paintings.filter(painting =>
+  //     painting.votes.includes(filter)
+  //   );
+  //   this.setState({ paintings: filteredPaintings });
+  // };
+
   render() {
     return (
       <div>
         <SortGallery sortGallery={this.sortGallery} />
-        <GalleryList paintings={this.state.paintings} />
+        <FilterGallery filter={this.filterGallery} />
+        <GalleryList
+          filterGallery={this.filterGallery}
+          paintings={this.state.paintings}
+        />
       </div>
     );
   }
