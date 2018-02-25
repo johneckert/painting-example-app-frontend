@@ -80,7 +80,7 @@ h1 {
 }
 
 .main {
-  display: inline-flex;
+  display: flex;
 }
 
 .gallery {
