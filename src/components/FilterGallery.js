@@ -3,9 +3,9 @@ import React from "react";
 class FilterGallery extends React.Component {
   render() {
     return (
-      <div>
+      <div className="filterdiv">
         <select
-          className="ui dropdown"
+          className="fselect"
           onChange={event => this.props.handleFilterCat(event)}
         >
           <option value="Title">Filter by Title:</option>
@@ -13,7 +13,7 @@ class FilterGallery extends React.Component {
           <option value="Museum">Filter by Museum:</option>
         </select>
         <input
-          className="ui input"
+          className="finput"
           onChange={event => this.props.handleFilterChange(event)}
           placeholder="Filter"
         />

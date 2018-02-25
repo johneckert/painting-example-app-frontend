@@ -2,9 +2,7 @@ import React from "react";
 
 const PaintingImage = props => {
   return (
-    <div>
-      <img src={props.painting.image} alt={props.painting.title} />
-    </div>
+    <img className="" src={props.painting.image} alt={props.painting.title} />
   );
 };
 

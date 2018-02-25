@@ -97,21 +97,32 @@ class GalleryContainer extends React.Component {
     return (
       <div>
         <div className="header">
-          <SortGallery sortGallery={this.sortGallery} />
-          <FilterGallery
-            handleFilterChange={this.handleFilterChange}
-            handleFilterCat={this.handleFilterCat}
+          <div>
+            <h1 className="title">ART</h1>
+          </div>
+          <ul className="inputs">
+            <li>
+              <SortGallery sortGallery={this.sortGallery} />
+            </li>
+            <li>
+              <FilterGallery
+                handleFilterChange={this.handleFilterChange}
+                handleFilterCat={this.handleFilterCat}
+                filterText={this.state.filterText}
+                filterCat={this.state.filterCat}
+              />
+            </li>
+          </ul>
+        </div>
+        <div className="main">
+          <GalleryList
             filterText={this.state.filterText}
             filterCat={this.state.filterCat}
+            paintings={this.state.paintings}
+            artists={this.state.artists}
+            museums={this.state.museums}
           />
         </div>
-        <GalleryList
-          filterText={this.state.filterText}
-          filterCat={this.state.filterCat}
-          paintings={this.state.paintings}
-          artists={this.state.artists}
-          museums={this.state.museums}
-        />
       </div>
     );
   }

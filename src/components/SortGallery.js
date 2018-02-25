@@ -13,16 +13,18 @@ class SortGallery extends React.Component {
 
   render() {
     return (
-      <select
-        className="ui dropdown"
-        onChange={this.handleChange}
-        value={this.state.value}
-      >
-        <option value="Label">Sort</option>
-        <option value="Title">Title</option>
-        <option value="Year">Year</option>
-        <option value="Popularity">Popularity</option>
-      </select>
+      <div className="sortdiv">
+        <select
+          className="sselect"
+          onChange={this.handleChange}
+          value={this.state.value}
+        >
+          <option value="Label">Sort</option>
+          <option value="Title">Title</option>
+          <option value="Year">Year</option>
+          <option value="Popularity">Popularity</option>
+        </select>
+      </div>
     );
   }
 }

@@ -47,15 +47,15 @@ class GalleryList extends React.Component {
             this.props.filterCat
           );
     return (
-      <ul className="galleryList">
+      <div className="gallery">
         {filteredPaintings.map(painting => {
           return (
-            <li key={painting.id}>
+            <div className="" key={painting.id}>
               <PaintingTile painting={painting} />
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     );
   }
 }
