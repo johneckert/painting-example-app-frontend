@@ -1,7 +1,7 @@
 import React from "react";
 
-import Painting from "./Painting";
-import Info from "./Info";
+import PaintingImage from "./PaintingImage";
+import PaintingInfo from "./PaintingInfo";
 
 class PaintingTile extends React.Component {
   state = {
@@ -12,16 +12,11 @@ class PaintingTile extends React.Component {
 
   render() {
     return (
-      <div onClick={this.handleClick}>
+      <div className="painting-tile" onClick={this.handleClick}>
         {this.state.clicked === false ? (
-          <Painting image={this.props.image} title={this.props.title} />
+          <PaintingImage painting={this.props.painting} />
         ) : (
-          <Info
-            title={this.props.title}
-            date={this.props.date}
-            artist={this.props.artist}
-            museum={this.props.museum}
-          />
+          <PaintingInfo painting={this.props.painting} />
         )}
       </div>
     );

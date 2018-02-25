@@ -3,12 +3,12 @@ import React from "react";
 import PaintingTile from "./PaintingTile";
 
 class GalleryList extends React.Component {
-  //Grab Artist and Museum
-  findArtist = artistId =>
-    this.props.artists.find(artist => artist.id === artistId);
-
-  findMuseum = museumId =>
-    this.props.museums.find(museum => museum.id === museumId);
+  // //Grab Artist and Museum
+  // findArtist = artistId =>
+  //   this.props.artists.find(artist => artist.id === artistId);
+  //
+  // findMuseum = museumId =>
+  //   this.props.museums.find(museum => museum.id === museumId);
 
   //FILTER
 
@@ -16,10 +16,10 @@ class GalleryList extends React.Component {
     let filteredPaintings = [];
     if (filterCat === "Title") {
       filteredPaintings = this.filterByTitle(paintings, filterText);
-    } else if (filterCat === "Year") {
-      filteredPaintings = this.filterByYear(paintings, filterText);
-      // } else if (filterCat === "Popularity") {
-      //   filteredPaintings = this.filterByPopularity(paintings, filterText);
+    } else if (filterCat === "Artist") {
+      filteredPaintings = this.filterByArtist(paintings, filterText);
+    } else if (filterCat === "Museum") {
+      filteredPaintings = this.filterByMuseum(paintings, filterText);
     } else {
       filteredPaintings = this.props.paintings;
     }
@@ -31,11 +31,11 @@ class GalleryList extends React.Component {
   filterByTitle = (paintings, filterText) =>
     paintings.filter(painting => painting.title.includes(filterText));
 
-  filterByYear = (paintings, filterText) =>
-    paintings.filter(painting => painting.title.includes(filterText));
+  filterByArtist = (paintings, filterText) =>
+    paintings.filter(painting => painting.artist.name.includes(filterText));
 
-  // filterByPopularity = (paintings, filterText) =>
-  //   paintings.filter(painting => painting.votes.includes(filterText));
+  filterByMuseum = (paintings, filterText) =>
+    paintings.filter(painting => painting.museum.name.includes(filterText));
 
   render() {
     const filteredPaintings =
@@ -51,13 +51,7 @@ class GalleryList extends React.Component {
         {filteredPaintings.map(painting => {
           return (
             <li key={painting.id}>
-              <PaintingTile
-                image={painting.image}
-                title={painting.title}
-                date={painting.date}
-                artist={this.findArtist(painting.artist_id)}
-                museum={this.findMuseum(painting.museum_id)}
-              />
+              <PaintingTile painting={painting} />
             </li>
           );
         })}

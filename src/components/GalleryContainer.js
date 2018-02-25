@@ -96,13 +96,15 @@ class GalleryContainer extends React.Component {
   render() {
     return (
       <div>
-        <SortGallery sortGallery={this.sortGallery} />
-        <FilterGallery
-          handleFilterChange={this.handleFilterChange}
-          handleFilterCat={this.handleFilterCat}
-          filterText={this.state.filterText}
-          filterCat={this.state.filterCat}
-        />
+        <div className="header">
+          <SortGallery sortGallery={this.sortGallery} />
+          <FilterGallery
+            handleFilterChange={this.handleFilterChange}
+            handleFilterCat={this.handleFilterCat}
+            filterText={this.state.filterText}
+            filterCat={this.state.filterCat}
+          />
+        </div>
         <GalleryList
           filterText={this.state.filterText}
           filterCat={this.state.filterCat}

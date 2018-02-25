@@ -3,16 +3,21 @@ import React from "react";
 class FilterGallery extends React.Component {
   render() {
     return (
-      <form>
-        <select onChange={event => this.props.handleFilterCat(event)}>
+      <div>
+        <select
+          className="ui dropdown"
+          onChange={event => this.props.handleFilterCat(event)}
+        >
           <option value="Title">Filter by Title:</option>
-          <option value="Year">Filter by Year:</option>
+          <option value="Artist">Filter by Artist:</option>
+          <option value="Museum">Filter by Museum:</option>
         </select>
         <input
+          className="ui input"
           onChange={event => this.props.handleFilterChange(event)}
           placeholder="Filter"
         />
-      </form>
+      </div>
     );
   }
 }
