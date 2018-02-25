@@ -10,7 +10,6 @@ class FilterGallery extends React.Component {
         >
           <option value="Title">Filter by Title:</option>
           <option value="Artist">Filter by Artist:</option>
-          <option value="Museum">Filter by Museum:</option>
         </select>
         <input
           className="finput"

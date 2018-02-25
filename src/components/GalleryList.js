@@ -1,18 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import PaintingTile from "./PaintingTile";
+import PaintingTile from './PaintingTile';
 
 class GalleryList extends React.Component {
   //FILTER
 
   filterGallery = (paintings, filterText, filterCat) => {
     let filteredPaintings = [];
-    if (filterCat === "Title") {
+    if (filterCat === 'Title') {
       filteredPaintings = this.filterByTitle(paintings, filterText);
-    } else if (filterCat === "Artist") {
+    } else if (filterCat === 'Artist') {
       filteredPaintings = this.filterByArtist(paintings, filterText);
-    } else if (filterCat === "Museum") {
-      filteredPaintings = this.filterByMuseum(paintings, filterText);
     } else {
       filteredPaintings = this.props.paintings;
     }
@@ -27,41 +25,35 @@ class GalleryList extends React.Component {
   filterByArtist = (paintings, filterText) =>
     paintings.filter(painting => painting.artist.name.includes(filterText));
 
-  filterByMuseum = (paintings, filterText) =>
-    paintings.filter(painting => painting.museum.name.includes(filterText));
-
   //solo museum Filter
 
-  museumFilter = (painting, filter) => {
-    if (filter === "All") {
-      return true;
+  museumFilter = (paintings, museumSelection) => {
+    console.log(paintings);
+    let filteredPaintings = [];
+    if (museumSelection === 'All') {
+      return this.filteredPaintings();
     } else {
-      return painting.museum.name === filter;
+      filteredPaintings = paintings.filter(painting => painting.museum.name === museumSelection);
     }
+    return filteredPaintings;
   };
 
+  filteredPaintings = () =>
+    this.props.filterText === ''
+      ? this.props.paintings
+      : this.filterGallery(this.props.paintings, this.props.filterText, this.props.filterCat);
+
   render() {
-    const filteredPaintings =
-      this.props.filterText === ""
-        ? this.props.paintings
-        : this.filterGallery(
-            this.props.paintings,
-            this.props.filterText,
-            this.props.filterCat
-          );
+    console.log(this.props.museumSelection);
     return (
       <div className="gallery">
-        {filteredPaintings
-          .filter(painting =>
-            this.museumFilter(painting, this.props.museumSelection)
-          )
-          .map(painting => {
-            return (
-              <div className="" key={painting.id}>
-                <PaintingTile painting={painting} />
-              </div>
-            );
-          })}
+        {this.museumFilter(this.filteredPaintings(), this.props.museumSelection).map(painting => {
+          return (
+            <div className="" key={painting.id}>
+              <PaintingTile painting={painting} />
+            </div>
+          );
+        })}
       </div>
     );
   }

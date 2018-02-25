@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import GalleryList from "./GalleryList";
-import SortGallery from "./SortGallery";
-import FilterGallery from "./FilterGallery";
-import MuseumFilter from "./MuseumFilter";
+import GalleryList from './GalleryList';
+import SortGallery from './SortGallery';
+import FilterGallery from './FilterGallery';
+import MuseumFilter from './MuseumFilter';
 
 class GalleryContainer extends React.Component {
   state = {
     paintings: [],
     artists: [],
     museums: [],
-    filterText: "",
-    filterCat: "Title",
-    museumSelection: "All"
+    filterText: '',
+    filterCat: 'Title',
+    museumSelection: 'All'
   };
 
   componentDidMount() {
@@ -22,7 +22,7 @@ class GalleryContainer extends React.Component {
   }
 
   getPaintings = () => {
-    fetch("http://localhost:3000/api/v1/paintings")
+    fetch('http://localhost:3000/api/v1/paintings')
       .then(res => res.json())
       .then(json => {
         this.setState({ paintings: json });
@@ -30,7 +30,7 @@ class GalleryContainer extends React.Component {
   };
 
   getArtists = () => {
-    fetch("http://localhost:3000/api/v1/artists")
+    fetch('http://localhost:3000/api/v1/artists')
       .then(res => res.json())
       .then(json => {
         this.setState({ artists: json });
@@ -38,7 +38,7 @@ class GalleryContainer extends React.Component {
   };
 
   getMuseums = () => {
-    fetch("http://localhost:3000/api/v1/museums")
+    fetch('http://localhost:3000/api/v1/museums')
       .then(res => res.json())
       .then(json => {
         this.setState({ museums: json });
@@ -46,11 +46,11 @@ class GalleryContainer extends React.Component {
   };
   //SORT FUNCTIONS
   sortGallery = criteria => {
-    if (criteria === "Title") {
+    if (criteria === 'Title') {
       this.sortByTitle();
-    } else if (criteria === "Year") {
+    } else if (criteria === 'Year') {
       this.sortByYear();
-    } else if (criteria === "Popularity") {
+    } else if (criteria === 'Popularity') {
       this.sortByPopularity();
     }
   };
