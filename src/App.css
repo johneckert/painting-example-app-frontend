@@ -22,7 +22,25 @@
   font-size: large;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

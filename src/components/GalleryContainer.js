@@ -7,12 +7,16 @@ import FilterGallery from "./FilterGallery";
 class GalleryContainer extends React.Component {
   state = {
     paintings: [],
+    artists: [],
+    museums: [],
     filterText: "",
     filterCat: "Title"
   };
 
   componentDidMount() {
     this.getPaintings();
+    this.getArtists();
+    this.getMuseums();
   }
 
   getPaintings = () => {
@@ -20,6 +24,22 @@ class GalleryContainer extends React.Component {
       .then(res => res.json())
       .then(json => {
         this.setState({ paintings: json });
+      });
+  };
+
+  getArtists = () => {
+    fetch("http://localhost:3000/api/v1/artists")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ artists: json });
+      });
+  };
+
+  getMuseums = () => {
+    fetch("http://localhost:3000/api/v1/museums")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({ galleries: json });
       });
   };
   //SORT FUNCTIONS
@@ -87,6 +107,8 @@ class GalleryContainer extends React.Component {
           filterText={this.state.filterText}
           filterCat={this.state.filterCat}
           paintings={this.state.paintings}
+          artists={this.state.artists}
+          museums={this.state.museums}
         />
       </div>
     );

@@ -1,6 +1,15 @@
 import React from "react";
 
+import PaintingTile from "./PaintingTile";
+
 class GalleryList extends React.Component {
+  //Grab Artist and Museum
+  findArtist = artistId =>
+    this.props.artists.find(artist => artist.id === artistId);
+
+  findMuseum = museumId =>
+    this.props.museums.find(museum => museum.id === museumId);
+
   //FILTER
 
   filterGallery = (paintings, filterText, filterCat) => {
@@ -42,11 +51,13 @@ class GalleryList extends React.Component {
         {filteredPaintings.map(painting => {
           return (
             <li key={painting.id}>
-              <h4>
-                {painting.title} |
-                {painting.date}
-              </h4>
-              <img src={painting.image} alt={painting.title} />
+              <PaintingTile
+                image={painting.image}
+                title={painting.title}
+                date={painting.date}
+                artist={this.findArtist(painting.artist_id)}
+                museum={this.findMuseum(painting.museum_id)}
+              />
             </li>
           );
         })}
