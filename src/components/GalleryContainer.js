@@ -3,6 +3,7 @@ import React from "react";
 import GalleryList from "./GalleryList";
 import SortGallery from "./SortGallery";
 import FilterGallery from "./FilterGallery";
+import MuseumFilter from "./MuseumFilter";
 
 class GalleryContainer extends React.Component {
   state = {
@@ -10,7 +11,8 @@ class GalleryContainer extends React.Component {
     artists: [],
     museums: [],
     filterText: "",
-    filterCat: "Title"
+    filterCat: "Title",
+    museumSelection: "All"
   };
 
   componentDidMount() {
@@ -39,7 +41,7 @@ class GalleryContainer extends React.Component {
     fetch("http://localhost:3000/api/v1/museums")
       .then(res => res.json())
       .then(json => {
-        this.setState({ galleries: json });
+        this.setState({ museums: json });
       });
   };
   //SORT FUNCTIONS
@@ -93,7 +95,14 @@ class GalleryContainer extends React.Component {
     this.setState({ filterCat: event.target.value });
   };
 
+  //MUSEUM Filter
+
+  handleMuseumChange = event => {
+    this.setState({ museumSelection: event.target.value });
+  };
+
   render() {
+    console.log(this.state.museumSelection);
     return (
       <div>
         <div className="header">
@@ -112,10 +121,18 @@ class GalleryContainer extends React.Component {
                 filterCat={this.state.filterCat}
               />
             </li>
+            <li>
+              <MuseumFilter
+                museums={this.state.museums}
+                handleMuseumChange={this.handleMuseumChange}
+                museumSelection={this.state.museumSelection}
+              />
+            </li>
           </ul>
         </div>
         <div className="main">
           <GalleryList
+            museumSelection={this.state.museumSelection}
             filterText={this.state.filterText}
             filterCat={this.state.filterCat}
             paintings={this.state.paintings}

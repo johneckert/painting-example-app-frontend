@@ -3,13 +3,6 @@ import React from "react";
 import PaintingTile from "./PaintingTile";
 
 class GalleryList extends React.Component {
-  // //Grab Artist and Museum
-  // findArtist = artistId =>
-  //   this.props.artists.find(artist => artist.id === artistId);
-  //
-  // findMuseum = museumId =>
-  //   this.props.museums.find(museum => museum.id === museumId);
-
   //FILTER
 
   filterGallery = (paintings, filterText, filterCat) => {
@@ -37,6 +30,16 @@ class GalleryList extends React.Component {
   filterByMuseum = (paintings, filterText) =>
     paintings.filter(painting => painting.museum.name.includes(filterText));
 
+  //solo museum Filter
+
+  museumFilter = (painting, filter) => {
+    if (filter === "All") {
+      return true;
+    } else {
+      return painting.museum.name === filter;
+    }
+  };
+
   render() {
     const filteredPaintings =
       this.props.filterText === ""
@@ -48,13 +51,17 @@ class GalleryList extends React.Component {
           );
     return (
       <div className="gallery">
-        {filteredPaintings.map(painting => {
-          return (
-            <div className="" key={painting.id}>
-              <PaintingTile painting={painting} />
-            </div>
-          );
-        })}
+        {filteredPaintings
+          .filter(painting =>
+            this.museumFilter(painting, this.props.museumSelection)
+          )
+          .map(painting => {
+            return (
+              <div className="" key={painting.id}>
+                <PaintingTile painting={painting} />
+              </div>
+            );
+          })}
       </div>
     );
   }
