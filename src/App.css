@@ -84,7 +84,9 @@ h1 {
 }
 
 .gallery {
-  display: inline-block;
+  width: 100%;
+  float: left;
+  display: inline;
 }
 
 .painting-tile {
@@ -93,7 +95,8 @@ h1 {
   display: flex;
   justify-content: center;
   margin: 5px;
-  max-width: 300px;
+  float: left;
+  width: 310px;
   height: 260px;
   border-radius: 1%;
   border-width: thin;

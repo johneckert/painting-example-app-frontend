@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import PaintingImage from "./PaintingImage";
-import PaintingInfo from "./PaintingInfo";
+import PaintingImage from './PaintingImage';
+import PaintingInfo from './PaintingInfo';
 
 class PaintingTile extends React.Component {
   state = {
@@ -24,5 +24,3 @@ class PaintingTile extends React.Component {
 }
 
 export default PaintingTile;
-
-//how can I get painting width height and make it the dimensions of the info div

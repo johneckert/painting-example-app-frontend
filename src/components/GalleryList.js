@@ -28,7 +28,6 @@ class GalleryList extends React.Component {
   //solo museum Filter
 
   museumFilter = (paintings, museumSelection) => {
-    console.log(paintings);
     let filteredPaintings = [];
     if (museumSelection === 'All') {
       return this.filteredPaintings();
@@ -44,7 +43,6 @@ class GalleryList extends React.Component {
       : this.filterGallery(this.props.paintings, this.props.filterText, this.props.filterCat);
 
   render() {
-    console.log(this.props.museumSelection);
     return (
       <div className="gallery">
         {this.museumFilter(this.filteredPaintings(), this.props.museumSelection).map(painting => {

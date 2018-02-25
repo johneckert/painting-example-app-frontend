@@ -102,7 +102,6 @@ class GalleryContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state.museumSelection);
     return (
       <div>
         <div className="header">
